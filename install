@@ -17,10 +17,7 @@ xbps-reconfigure -f glibc-locales
 
 cp /proc/mounts /etc/fstab
 blkid >> /etc/fstab
-	/boot/efi 0 2
-	/ 0 1
-	/home 0 2
-	/swap 0 0
+	( /boot/efi 0 2 || / 0 1 || /home 0 2 || /swap 0 0 )
 	tmpfs           /tmp        tmpfs   defaults,nosuid,nodev   0 0
 
 xbps-install grub-x86_64-efi
