@@ -1,4 +1,5 @@
 Conectar a internet, formatar os discos, particionar e montar.
+	* Entre parênteses se a aplicação for nescessária.
 
 ( mkdir -p /mnt/var/db/xbps/keys; cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ )
 
