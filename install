@@ -4,8 +4,7 @@ mkdir -p /mnt/var/db/xbps/keys
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
 
 REPO=https://repo-us.voidlinux.org/current || REPO=https://alpha.de.repo.voidlinux.org/current
-ARCH=x86_64
-XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-mininal linux5.15 linux-firmware nano
+XBPS_ARCH=x86_64 xbps-install -S -r /mnt -R "$REPO" base-mininal linux5.15 linux-firmware nano
 
 ( export SSL_NO_VERIFY_PEER=true )
 
