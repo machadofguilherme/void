@@ -1,7 +1,6 @@
 Conectar a internet, formatar os discos, particionar e montar.
 
-mkdir -p /mnt/var/db/xbps/keys
-cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
+( mkdir -p /mnt/var/db/xbps/keys; cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/ )
 
 REPO=https://repo-us.voidlinux.org/current || REPO=https://alpha.de.repo.voidlinux.org/current
 XBPS_ARCH=x86_64 xbps-install -S -r /mnt -R "$REPO" base-mininal linux5.15 linux-firmware nano
@@ -13,11 +12,11 @@ void-chroot
 nano /etc/hostname
 nano /etc/rc.conf
 nano /etc/default/libc-locales
-
+ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 xbps-reconfigure -f glibc-locales
 
 cp /proc/mounts /etc/fstab
-blkid
+blkid >> /etc/fstab
 	/boot/efi 0 2
 	/ 0 1
 	/home 0 2
@@ -25,6 +24,6 @@ blkid
 	tmpfs           /tmp        tmpfs   defaults,nosuid,nodev   0 0
 
 xbps-install grub-x86_64-efi
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --recheck
 
 xbps-reconfigure -fa
