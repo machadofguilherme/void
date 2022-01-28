@@ -3,7 +3,7 @@ Conectar a internet, formatar os discos, particionar e montar.
 mkdir -p /mnt/var/db/xbps/keys
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
 
-REPO=https://repo-us.voidlinux.org/current
+REPO=https://repo-us.voidlinux.org/current || REPO=https://alpha.de.repo.voidlinux.org/current
 ARCH=x86_64
 XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-mininal linux5.15 linux-firmware nano
 
