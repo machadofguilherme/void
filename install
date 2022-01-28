@@ -1,0 +1,25 @@
+Conectar a internet, formatar os discos, particionar e montar.
+
+REPO=https://repo-us.voidlinux.org/current
+ARCH=x86_64
+XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-mininal linux5.15 linux-firmware
+void-chroot
+
+nano /etc/hostname
+nano /etc/rc.conf
+nano /etc/default/libc-locales
+
+xbps-reconfigure -f glibc-locales
+
+cp /proc/mounts /etc/fstab
+blkid
+	/boot/efi 0 2
+	/ 0 1
+	/home 0 2
+	/swap 0 0
+	tmpfs           /tmp        tmpfs   defaults,nosuid,nodev   0 0
+
+xbps-install grub-x86_64-efi
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
+
+xbps-reconfigure -fa
